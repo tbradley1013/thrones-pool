@@ -18,10 +18,11 @@ suppressWarnings({
 
 
 read_submission <- function(file){
+  # browser()
   char_locs <- c("B4:D24", "E4:G24")
   
   name <- read_excel(file, range = "C2", col_names = FALSE)
-  name <- name$X__1
+  name <- name[[1,1]]
   
   character_df <- map_dfr(char_locs, ~{
     df <- read_excel(file, range = .x)
@@ -47,7 +48,7 @@ read_submission <- function(file){
   
   props_df <- read_excel(file, range = "B25:G31") %>% 
     janitor::clean_names() %>% 
-    select(bonus_questions, answer = x_5) %>% 
+    select(bonus_questions, answer = 6) %>% 
     mutate(
       points = str_extract(bonus_questions, "\\([0-9]") %>% str_extract("[0-9]") %>% as.numeric(),
       question = str_extract(bonus_questions, "(^.*)?\\?"),
@@ -117,3 +118,19 @@ player_stats <- answers %>%
   ) %>% 
   mutate_if(is.numeric, round, 0) %>% 
   arrange(desc(total_points))
+
+
+
+player_comp_char <- answers %>% 
+  filter(question_type == "character") %>% 
+  select(-c(points, question_type)) %>% 
+  spread(key = submitter, value = answer)
+
+player_comp_prop <- answers %>% 
+  filter(question_type == "prop") %>% 
+  select(-c(points, question_type)) %>% 
+  spread(key = submitter, value = answer)
+
+
+  
+  
