@@ -115,4 +115,5 @@ player_stats <- answers %>%
     num_props_wrong = sum(question_type == "prop" & !is.na(master) & answer != master),
     prop_points = sum((question_type == "prop" & !is.na(master) & answer == master)*points)
   ) %>% 
+  mutate_if(is.numeric, round, 0) %>% 
   arrange(desc(total_points))

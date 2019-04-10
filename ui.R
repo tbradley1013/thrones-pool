@@ -11,7 +11,7 @@ shinyUI(
     useShinyjs(),
     navbarPage(
       title = "Game of Thrones Death Pool",
-      theme = shinytheme("darkly"),
+      theme = shinytheme("united"),
       
       # tab for the main results table
       tabPanel(
@@ -19,7 +19,7 @@ shinyUI(
           "Leaderboard"
         ),
         div(
-          
+          dataTableOutput("leaderboard")
         )
       )
     )

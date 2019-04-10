@@ -4,7 +4,7 @@ shinyServer(
     session$onSessionEnded(stopApp)
     
     output$leaderboard <- renderDataTable({
-      datatable()
+      datatable(leaderboard)
     })
   }
 )
