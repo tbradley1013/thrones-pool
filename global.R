@@ -12,6 +12,7 @@ suppressWarnings({
     library(shinyjs)
     library(tidyverse)
     library(readxl)
+    library(DT)
   })
 })
 
@@ -97,4 +98,21 @@ answers <- submissions %>%
 
 leaderboard <- answers %>% 
   group_by(submitter) %>% 
-  summarize(all_points = sum(points))
+  summarize(
+    total_points = sum(points)
+  ) %>% 
+  arrange(desc(total_points))
+
+
+player_stats <- answers %>% 
+  group_by(submitter) %>% 
+  summarize(
+    total_points = sum(points),
+    num_character_correct = sum(question_type == "character" & answer == master),
+    num_character_wrong = sum(question_type == "character" & answer != master),
+    character_points = num_character_correct - num_character_wrong,
+    num_props_correct = sum(question_type == "prop" & !is.na(master) & answer == master),
+    num_props_wrong = sum(question_type == "prop" & !is.na(master) & answer != master),
+    prop_points = sum((question_type == "prop" & !is.na(master) & answer == master)*points)
+  ) %>% 
+  arrange(desc(total_points))
