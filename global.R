@@ -19,7 +19,7 @@ suppressWarnings({
 
 read_submission <- function(file){
   # browser()
-  char_locs <- c("B4:D24", "E4:G24")
+  char_locs <- c("B4:C24", "D4:E24")
   
   name <- read_excel(file, range = "C2", col_names = FALSE)
   name <- name[[1,1]]
@@ -35,20 +35,14 @@ read_submission <- function(file){
   
   character_df <- character_df %>% 
     mutate(
-      answer = case_when(
-        lives & dies ~ "lives",
-        lives ~ "lives",
-        dies ~ "dies",
-        TRUE ~ "lives"
-      ),
       question_type = "character"
     ) %>% 
-    select(question = character, question_type, answer)
+    select(question = character, question_type, answer = lives_dies)
   
   
-  props_df <- read_excel(file, range = "B25:G31") %>% 
+  props_df <- read_excel(file, range = "B25:E34") %>% 
     janitor::clean_names() %>% 
-    select(bonus_questions, answer = 6) %>% 
+    select(bonus_questions, answer) %>% 
     mutate(
       points = str_extract(bonus_questions, "\\([0-9]") %>% str_extract("[0-9]") %>% as.numeric(),
       question = str_extract(bonus_questions, "(^.*)?\\?"),
