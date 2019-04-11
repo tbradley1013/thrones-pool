@@ -19,12 +19,22 @@ shinyUI(
           "Leaderboard"
         ),
         div(
+          h2("Leaderboard"),
           dataTableOutput("leaderboard")
         )
       ),
       tabPanel(
         div(
           "Compare Choices"
+        ),
+        div(
+          selectInput(
+            inputId = "people_filter",
+            label = "Show People",
+            choices = c("All", unique(answers$submitter)),
+            selected = "All",
+            multiple = TRUE
+          )
         ),
         div(
           h2("Character Survival"),
@@ -35,6 +45,15 @@ shinyUI(
         div(
           h2("Bonus Questions"),
           dataTableOutput("comp_prop")
+        )
+      ),
+      tabPanel(
+        div(
+          "Player Stats"
+        ),
+        div(
+          h2("Player Stats"),
+          dataTableOutput("player_stats")
         )
       )
     )
