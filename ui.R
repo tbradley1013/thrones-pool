@@ -49,11 +49,30 @@ shinyUI(
       ),
       tabPanel(
         div(
+          "Answer Summaries"
+        ),
+        div(
+          h2("Answer Summaries"),
+          plotlyOutput("character_outcome_fig"),
+          plotlyOutput("wins_got"),
+          plotlyOutput("dies_first"),
+          plotlyOutput("dies_last"),
+          plotlyOutput("kills_night_king"),
+          plotlyOutput("kills_cercei"),
+          plotlyOutput("undead_ned"),
+          plotlyOutput("cleganebowl"),
+          plotlyOutput("stark_children"),
+          plotlyOutput("arya_kills")
+        )
+      ),
+      tabPanel(
+        div(
           "Player Stats"
         ),
         div(
           h2("Player Stats"),
-          dataTableOutput("player_stats")
+          dataTableOutput("player_stats"),
+          plotlyOutput("positivity")
         )
       )
     )
