@@ -13,6 +13,7 @@ suppressWarnings({
     library(tidyverse)
     library(readxl)
     library(DT)
+    library(plotly)
   })
 })
 
@@ -76,4 +77,6 @@ player_comp_prop <- answers %>%
 
 
   
-  
+prop_counts <- submissions %>% 
+  filter(question_type == "prop") %>% 
+  count(question, answer)
