@@ -80,3 +80,22 @@ player_comp_prop <- answers %>%
 prop_counts <- submissions %>% 
   filter(question_type == "prop") %>% 
   count(question, answer)
+
+
+prop_graphs <- function(filt, title){
+  prop_counts %>% 
+    filter(str_detect(question, filt)) %>% 
+    mutate(answer = factor(answer) %>% fct_reorder(n)) %>% 
+    plot_ly(x = ~answer, y = ~n, type = "bar") %>% 
+    layout(
+      title = title,
+      yaxis = list(
+        title = "Count"
+      ),
+      xaxis = list(
+        title = "",
+        dtick = 1,
+        autorange = "reversed"
+      )
+    )
+}
