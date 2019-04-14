@@ -6,7 +6,11 @@ shinyServer(
     output$leaderboard <- renderDataTable({
       leaderboard %>% 
         rename_all(list(~str_to_title(str_replace_all(., "_", " ")))) %>% 
-        datatable()
+        datatable(
+          options = list(
+            pageLength = nrow(leaderboard)
+          )
+        )
     })
     
     
