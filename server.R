@@ -4,7 +4,9 @@ shinyServer(
     session$onSessionEnded(stopApp)
     
     output$leaderboard <- renderDataTable({
-      datatable(leaderboard)
+      leaderboard %>% 
+        rename_all(list(~str_to_title(str_replace_all(., "_", " ")))) %>% 
+        datatable()
     })
     
     
@@ -24,7 +26,7 @@ shinyServer(
         
       
       df %>% 
-        rename(character = question) %>% 
+        rename(Character = question, Master = master) %>% 
         datatable(
           rownames = FALSE,
           options = list(
@@ -53,6 +55,7 @@ shinyServer(
       
       
       df %>% 
+        rename(Question = question, Master = master) %>% 
         datatable(rownames = FALSE)
     })
     
