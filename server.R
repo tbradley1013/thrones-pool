@@ -75,8 +75,8 @@ shinyServer(
         mutate_at(vars(Dies, Lives), list(~ifelse(is.na(.), 0, .))) %>% 
         mutate(character = factor(question) %>% fct_reorder(Dies)) %>% 
         arrange(desc(character)) %>% 
-        plot_ly(x = ~character, y = ~Dies, type = "bar", name = "Dies") %>% 
-        add_trace(y = ~Lives, name = "Lives") %>% 
+        plot_ly(x = ~character, y = ~Dies, type = "bar", name = "Dies", marker = list(color = "#8a0303")) %>% 
+        add_trace(y = ~Lives, name = "Lives", marker = list(color = "#95ced6")) %>% 
         layout(
           yaxis = list(title = 'Count'), 
           barmode = 'stack',
@@ -96,8 +96,8 @@ shinyServer(
         spread(key = answer, value = n) %>% 
         mutate_at(vars(Dies, Lives), list(~ifelse(is.na(.), 0, .))) %>% 
         mutate(submitter = factor(submitter) %>% fct_reorder(Dies)) %>% 
-        plot_ly(x = ~submitter, y = ~Dies, type = "bar", name = "Dies") %>% 
-        add_trace(y = ~Lives, name = "Lives") %>% 
+        plot_ly(x = ~submitter, y = ~Dies, type = "bar", name = "Dies", marker = list(color = "#8a0303")) %>% 
+        add_trace(y = ~Lives, name = "Lives", marker = list(color = "#95ced6")) %>% 
         layout(
           yaxis = list(title = 'Count'), 
           barmode = 'stack',

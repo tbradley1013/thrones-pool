@@ -86,7 +86,7 @@ prop_graphs <- function(filt, title){
   prop_counts %>% 
     filter(str_detect(question, filt)) %>% 
     mutate(answer = factor(answer) %>% fct_reorder(n)) %>% 
-    plot_ly(x = ~answer, y = ~n, type = "bar") %>% 
+    plot_ly(x = ~answer, y = ~n, type = "bar", marker = list(color = "#8a0303")) %>% 
     layout(
       title = title,
       yaxis = list(
