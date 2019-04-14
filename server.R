@@ -67,7 +67,10 @@ shinyServer(
     output$player_stats <- renderDataTable({
       player_stats %>% 
         rename_all(list(~str_to_title(str_replace(str_replace_all(., "_", " "), "num", "#")))) %>% 
-        datatable(rownames = FALSE)
+        datatable(rownames = FALSE,
+                  options = list(
+                    pageLength = nrow(player_stats)
+                  ))
     })
     
     
