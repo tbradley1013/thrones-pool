@@ -9,7 +9,7 @@
 shinyUI(
   tagList(
     useShinyjs(),
-    navbarPage(
+    navbarPageWithInputs(
       title = "Game of Thrones Death Pool",
       theme = shinytheme("cosmo"),
       
@@ -74,6 +74,13 @@ shinyUI(
           dataTableOutput("player_stats"),
           plotlyOutput("positivity")
         )
+      ),
+      inputs = div(
+        p(
+          "Last Updated: S8E1", 
+          style = "color:white;font-size:10px;"
+        ),
+        style = "position:relative;float:right;"
       )
     )
   )
