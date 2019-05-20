@@ -77,7 +77,7 @@ shinyUI(
       ),
       inputs = div(
         p(
-          "Last Updated: S8E5", 
+          "Last Updated: S8E6", 
           style = "color:white;font-size:10px;"
         ),
         style = "position:relative;float:right;"
